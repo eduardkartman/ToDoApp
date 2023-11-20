@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      th:rel="stylesheet"
+      th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css} "
+    />
+
+    <!-- Include your CSS directly within the <style> tag -->
+    <style th:inline="text">
+      /* Paste your CSS code here */
+      body {
+        background-color:#ebfcfc; /* Light beige background color */
+      }
+
+      .container {
+        margin-top: 50px; /* Adjust as needed */
+        border-radius: 15px; /* Rounded edges */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        padding: 40px; /* Make the container thicker */
+        max-width: 900px; /* Set a maximum width if desired */
+        background-color: #fffff4;
+      }
+
+      .table {
+        margin: 0 auto; /* Center the table */
+      }
+
+      .btn-warning {
+        float: right; /* Float the "Add a new task!" button to the right */
+        margin-top: 15px; /* Adjust as needed */
+        margin-bottom: 10px;
+      }
+      .btn-warning:hover {
+            box-shadow: 0 0 10px rgba(255, 166, 0, 0.925);
+            background-color: #ffa807; /* Change to your desired color */
+            color: #fff; /* Change to your desired color */
+        }
+
+      /* Thymeleaf-specific adjustments */
+      /* Use th:class to add classes with Thymeleaf expressions */
+      tr.th-success {
+        background-color: lightgreen; /* Adjust the background color for completed items */
+      }
+
+      .btn-outlined-success:hover,
+      .btn-outlined-info:hover,
+      .btn-outlined-danger:hover, 
+      .btn-warning:hover{
+        animation: shake 0.2s; /* Apply the shake animation on hover */
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25%,
+        75% {
+          transform: translateX(-3px);
+        }
+        50% {
+          transform: translateX(3px);
+        }
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1 class="text-center">ToDo List 📌</h1>
+      <hr />
+      <p>
+        <a class="btn btn-warning" href="/create-todo">Add a new task!</a>
+      </p>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Complete</th>
+            <th>Edit</th>
+            <th>Delete</th>
+            <th>Complete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            th:each="item : ${todoItems}"
+            th:class="${item.complete} ? success : danger"
+          >
+            <td th:text="${item.description}">item_description</td>
+            <td th:text="${item.complete}? DONE : ONGOING">item_complete</td>
+            <td>
+                <a class="btn btn-outlined-info btn-lg" th:href="@{/edit/{id}(id=${item.id})}"
+                ><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
+                    <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+                  </svg></a>
+            </td>
+            <td>
+                <a
+                  class="btn btn-outlined-danger btn-lg"
+                  th:href="@{/delete/{id}(id=${item.id})}"
+                  > ⛔ </a
+                >
+            </td>
+            <td>
+                <a
+                  class="btn btn-outlined-success btn-lg"
+                  th:href="@{/done/{id}(id=${item.id})}"
+                  > ✅ </a
+                >
+            </td>
+                <!-- <div class="checkbox">
+                                  <label>
+                                      <input type="checkbox" th:checked="${complete} == true" th:field="*{complete}" id="complete" />
+                                  </label>
+                              </div> -->
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.4.1/js/bootstrap.min.js}"></script>
+  </body>
+</html>

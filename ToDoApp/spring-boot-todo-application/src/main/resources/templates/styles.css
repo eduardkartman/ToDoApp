@@ -1,0 +1,29 @@
+body {
+  background-color: #f5f5ec; /* Light beige background color */
+}
+
+.container {
+  margin-top: 50px; /* Adjust as needed */
+  border-radius: 15px; /* Rounded edges */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.table {
+  margin: 0 auto; /* Center the table */
+}
+
+.btn-success {
+  float: right; /* Float the "Add a new task!" button to the right */
+  margin-top: 15px; /* Adjust as needed */
+}
+
+/* Optional: Add padding to the container for better aesthetics */
+.container {
+  padding: 20px;
+}
+
+/* Thymeleaf-specific adjustments */
+/* Use th:class to add classes with Thymeleaf expressions */
+tr.th-success {
+  background-color: lightgreen; /* Adjust the background color for completed items */
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      th:rel="stylesheet"
+      th:href="@{/webjars/bootstrap/3.4.1/css/bootstrap.min.css} "
+    />
+
+    <!-- Include your CSS directly within the <style> tag -->
+    <style th:inline="text">
+      /* Paste your CSS code here */
+      body {
+        background-color: #ebfcfc; /* Light beige background color */
+      }
+
+      .container {
+        margin-top: 50px; /* Adjust as needed */
+        border-radius: 15px; /* Rounded edges */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        padding: 40px; /* Make the container thicker */
+        max-width: 800px; /* Set a maximum width if desired */
+        background-color: #fffff4;
+      }
+
+      .btn-warning {
+        float: left; /* Float the "Add a new task!" button to the right */
+      }
+      .btn-warning:hover {
+        box-shadow: 0 0 10px rgba(255, 166, 0, 0.925);
+        background-color: #ffa807; /* Change to your desired color */
+        color: #fff; /* Change to your desired color */
+        animation: shake 0.2s; /* Apply the shake animation on hover */
+      }
+
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25%,
+        75% {
+          transform: translateX(-3px);
+        }
+        50% {
+          transform: translateX(3px);
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="col-md-9">
+        <h1>Add a New Task! 💡</h1>
+        <form
+          action="#"
+          th:action="@{/todo}"
+          th:object="${todoItem}"
+          method="POST"
+        >
+          <br />
+          <div class="form-group">
+            <label for="description">Description</label>
+            <input
+              class="form-control"
+              type="text"
+              th:field="*{description}"
+              id="description"
+              placeholder="Description"
+            />
+            <span
+              th:if="${#fields.hasErrors('description')}"
+              th:errors="*{description}"
+            ></span>
+          </div>
+          <br />
+
+          <button type="submit" class="btn btn-warning">Add task!</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
